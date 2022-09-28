@@ -37,9 +37,8 @@ public class RecruitmentRequestService {
             List<Job> jobs = new ArrayList<>();
             while (rs.next()) {
                 Job newJob = new Job();
-                newJob.setId(rs.getInt((0)));
-                newJob.setName(rs.getString(1));
-                newJob.setJob_description(rs.getString(2));
+                newJob.setId(rs.getInt((1)));
+                newJob.setName(rs.getString(2));
                 jobs.add(newJob);
             }
             return jobs;

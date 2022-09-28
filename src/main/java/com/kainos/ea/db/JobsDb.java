@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+
 public class JobsDb {
 
     private static Connection conn;
@@ -22,7 +23,7 @@ public class JobsDb {
         try {
 
             FileInputStream propsStream =
-                    new FileInputStream("kainos-recruitment-api/src/main/resources/db.properties");
+                    new FileInputStream("/Users/jade/Academy/teamC/kainos-recruitment-api/src/main/resources/db.properties");
 
             Properties props = new Properties();
             props.load(propsStream);
