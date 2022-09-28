@@ -23,7 +23,7 @@ public class JobsDb {
         try {
 
             FileInputStream propsStream =
-                    new FileInputStream("/Users/jade/Academy/teamC/kainos-recruitment-api/src/main/resources/db.properties");
+                    new FileInputStream("./src/main/resources/db.properties");
 
             Properties props = new Properties();
             props.load(propsStream);

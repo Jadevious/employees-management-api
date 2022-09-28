@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 public class RecruitmentRequestService {
 
     @GET
-    @Path("/jobs")
+    @Path("/job-roles")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Job> getMsg() {
         try {
