@@ -39,6 +39,7 @@ public class RecruitmentRequestService {
                 Job newJob = new Job();
                 newJob.setId(rs.getInt((1)));
                 newJob.setName(rs.getString(2));
+                newJob.setJob_description(rs.getString(3));
                 jobs.add(newJob);
             }
             return jobs;
