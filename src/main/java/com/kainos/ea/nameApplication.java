@@ -24,7 +24,7 @@ public class nameApplication extends Application<nameConfiguration> {
     @Override
     public void run(final nameConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new WebService());
+        environment.jersey().register(new RecruitmentRequestService());
         // TODO: implement application
     }
 
