@@ -1,6 +1,6 @@
 package com.kainos.ea;
 
-import com.kainos.ea.resources.WebService;
+import com.kainos.ea.controller.RecruitmentRequestService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;

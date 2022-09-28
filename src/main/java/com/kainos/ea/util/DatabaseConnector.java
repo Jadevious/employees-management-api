@@ -1,18 +1,18 @@
-package com.kainos.ea.db;
+package com.kainos.ea.util;
+
+import com.kainos.ea.exception.DatabaseConnectionException;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Properties;
 
 
-public class JobsDb {
+public class DatabaseConnector {
 
     private static Connection conn;
 
-    public static Connection getConnection() {
+    public Connection getConnection() throws DatabaseConnectionException {
         String user;
         String password;
         String host;
@@ -44,8 +44,7 @@ public class JobsDb {
             return conn;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new DatabaseConnectionException(e);
         }
-        return null;
     }
 }
