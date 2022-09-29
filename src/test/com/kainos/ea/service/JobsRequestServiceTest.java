@@ -26,41 +26,21 @@ class JobsRequestServiceTest {
 
     Connection conn;
 
-    /*
-    Unit test 1
-
-    A unit test for the getJobs method in JobsRequestService
-    When the dao returns a list of job roles
-    Expect the list of job roles to be returned
-
-    (This should pass without changes to the code)
-     */
-
     @Test
     void getJobs_shouldReturnListOfJobs_whenDaoReturnsListOfJobs() throws DatabaseConnectionException, SQLException {
-        List<Job> before = new ArrayList<Job>();
-        before.add(new Job(
+        List<Job> expected = new ArrayList<Job>();
+        expected.add(new Job(
                 1,
                 "Software Engineer",
                 "Develops Software for Kainos"
         ));
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(jobsDao.getJobs(conn)).thenReturn(before);
+        Mockito.when(jobsDao.getJobs(conn)).thenReturn(expected);
 
-        List<Job> after = jobsRequestService.getJobs();
+        List<Job> actual = jobsRequestService.getJobs();
 
-        assertEquals(after, before);
+        assertEquals(actual, expected);
     }
-
-    /*
-    Unit test 2
-
-    A unit test for the getJobs method in JobsRequestService
-    When the dao throws a SQLException
-    Expect SQLException to be thrown
-
-    (This should pass without changes to the code)
-     */
 
     @Test
     void getJobs_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {

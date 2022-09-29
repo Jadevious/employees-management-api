@@ -10,7 +10,7 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM job_roles");
+        PreparedStatement statement = c.prepareStatement("SELECT id, name, job_description FROM job_roles");
         ResultSet rs = statement.executeQuery();
 
         if (!rs.isBeforeFirst()) {
@@ -19,11 +19,8 @@ public class JobsDao {
 
         List<Job> jobs = new ArrayList<>();
         while (rs.next()) {
-            Job newJob = new Job();
-            newJob.setId(rs.getInt((1)));
-            newJob.setName(rs.getString(2));
-            newJob.setJob_description(rs.getString(3));
-            jobs.add(newJob);
+            Job job = new Job(rs.getInt(1), rs.getString(2), rs.getString(3));
+            jobs.add(job);
         }
         return jobs;
     }

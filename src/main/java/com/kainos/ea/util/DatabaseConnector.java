@@ -22,21 +22,20 @@ public class DatabaseConnector {
 
         try {
 
-            FileInputStream propsStream =
-                    new FileInputStream("./src/main/resources/db.properties");
+            FileInputStream propsStream = new FileInputStream("./src/main/resources/db.properties");
 
             Properties props = new Properties();
             props.load(propsStream);
 
-            user            = props.getProperty("user");
-            password        = props.getProperty("password");
-            host            = props.getProperty("host");
-            db              = props.getProperty("db");
+            user = props.getProperty("user");
+            password = props.getProperty("password");
+            host = props.getProperty("host");
+            db = props.getProperty("db");
 
-            if ( user == null || password == null || host == null )
+            if ( user == null || password == null || host == null || db == null)
                 throw new IllegalArgumentException(
                         "Properties file must exist and must contain "
-                                + "user, password, and host properties.");
+                                + "user, password, host and database name properties.");
 
 
             conn = DriverManager.getConnection("jdbc:mysql://"
