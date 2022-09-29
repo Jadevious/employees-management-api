@@ -1,6 +1,6 @@
 package com.kainos.ea;
 
-import com.kainos.ea.controller.RecruitmentRequestService;
+import com.kainos.ea.controller.RecruitmentRequests;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -24,8 +24,7 @@ public class nameApplication extends Application<nameConfiguration> {
     @Override
     public void run(final nameConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new RecruitmentRequestService());
-        // TODO: implement application
+        environment.jersey().register(new RecruitmentRequests());
     }
 
 }

@@ -65,6 +65,12 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>2.23.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <version>2.0.23</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

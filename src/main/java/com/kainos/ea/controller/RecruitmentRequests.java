@@ -15,10 +15,10 @@ import javax.ws.rs.core.Response;
 import java.sql.*;
 
 @Path("/api")
-public class RecruitmentRequestService {
+public class RecruitmentRequests {
     private static JobsRequestService jobService;
 
-    public RecruitmentRequestService() {
+    public RecruitmentRequests() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         jobService = new JobsRequestService(new JobsDao(), databaseConnector);
     }
