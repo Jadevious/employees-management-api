@@ -1,9 +1,11 @@
 package com.kainos.ea.dao;
+
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.models.Job;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,8 @@ public class JobsDao {
 
         List<Job> jobs = new ArrayList<>();
         while (rs.next()) {
-            Job job = new Job(rs.getInt(1), rs.getString(2), rs.getString(3));
-            jobs.add(job);
+            jobs.add(new Job(rs.getInt(1), rs.getString(2), rs.getString(3)));
         }
         return jobs;
     }
-
 }

@@ -3,10 +3,11 @@ package com.kainos.ea.util;
 import com.kainos.ea.exception.DatabaseConnectionException;
 
 import java.io.FileInputStream;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Properties;
 
+import java.util.Properties;
 
 public class DatabaseConnector {
 

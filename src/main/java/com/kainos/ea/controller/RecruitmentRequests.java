@@ -1,10 +1,10 @@
 package com.kainos.ea.controller;
 
-
 import com.kainos.ea.dao.JobsDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.service.JobsRequestService;
 import com.kainos.ea.util.DatabaseConnector;
+
 import org.eclipse.jetty.http.HttpStatus;
 
 import javax.ws.rs.GET;
@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import java.sql.*;
 
 @Path("/api")

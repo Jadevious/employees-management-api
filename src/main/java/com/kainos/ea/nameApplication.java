@@ -1,6 +1,7 @@
 package com.kainos.ea;
 
 import com.kainos.ea.controller.RecruitmentRequests;
+
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -26,5 +27,4 @@ public class nameApplication extends Application<nameConfiguration> {
                     final Environment environment) {
         environment.jersey().register(new RecruitmentRequests());
     }
-
 }

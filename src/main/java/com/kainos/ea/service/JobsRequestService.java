@@ -6,6 +6,7 @@ import com.kainos.ea.models.Job;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.SQLException;
+
 import java.util.List;
 
 public class JobsRequestService {
@@ -19,5 +20,4 @@ public class JobsRequestService {
     public List<Job> getJobs() throws DatabaseConnectionException, SQLException {
         return dao.getJobs(connector.getConnection());
     }
-
 }

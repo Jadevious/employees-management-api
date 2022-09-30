@@ -2,6 +2,7 @@ package com.kainos.ea.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.checkerframework.checker.signature.qual.Identifier;
 
 import javax.validation.constraints.NotEmpty;
@@ -17,8 +18,7 @@ public class Job {
     @NotEmpty
     private String job_description;
 
-    @JsonCreator
-    public Job(@JsonProperty("jobId") @Identifier int id, @JsonProperty("jobName") String name, @JsonProperty("job_description") String job_description) {
+    public Job(int id, String name, String job_description) {
         this.id = id;
         this.name = name;
         this.job_description = job_description;
