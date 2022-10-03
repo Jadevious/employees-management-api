@@ -32,7 +32,8 @@ class JobsRequestServiceTest {
         expected.add(new Job(
                 1,
                 "Software Engineer",
-                "Develops Software for Kainos"
+                "Develops Software for Kainos",
+                "Experience of building and testing modern software applications"
         ));
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobsDao.getJobs(conn)).thenReturn(expected);
