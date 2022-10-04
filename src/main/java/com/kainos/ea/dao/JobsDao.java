@@ -21,7 +21,7 @@ public class JobsDao {
 
         List<Job> jobs = new ArrayList<>();
         while (rs.next()) {
-            jobs.add(new Job(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(6)));
+            jobs.add(new Job(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
         }
         return jobs;
     }
