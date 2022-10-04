@@ -18,11 +18,10 @@ public class Job {
     @NotEmpty
     private String job_description;
     @NotEmpty
-    private String job_specification;
+    private String job_responsibilities;
 
     public Job() {
     }
-
 
     public Job(int id, String name, String job_description) {
         this.id = id;
@@ -30,11 +29,11 @@ public class Job {
         this.job_description = job_description;
     }
 
-    public Job(int id, String name, String job_description, String job_specification) {
+    public Job(int id, String name, String job_description, String job_responsibilities) {
         this.id = id;
         this.name = name;
         this.job_description = job_description;
-        this.job_specification = job_specification;
+        this.job_responsibilities = job_responsibilities;
     }
 
     public int getId() {
@@ -61,7 +60,7 @@ public class Job {
         this.job_description = job_description;
     }
 
-    public String getJob_specification() { return job_specification; }
+    public String getJob_responsibilities() {return job_responsibilities;}
 
-    public void setJob_specification(String job_specification) { this.job_specification = job_specification; }
+    public void setJob_responsibilities(String job_responsibilities) {this.job_responsibilities = job_responsibilities;}
 }

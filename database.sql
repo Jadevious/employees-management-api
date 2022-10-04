@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS job_roles (
 id smallint PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) NOT NULL,
 job_description varchar(500) NOT NULL,
-job_specification varchar(255)
+job_responsibilities varchar(500)
 );
 
 -- Engineering Capability
