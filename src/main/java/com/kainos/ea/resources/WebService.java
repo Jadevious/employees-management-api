@@ -6,7 +6,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
 @Path("/api")
 public class WebService {
     @GET
@@ -15,5 +14,4 @@ public class WebService {
     public String getMsg(@PathParam("msg") String message) {
         return "Hello from a RESTful Web service: " + message;
     }
-
 }
