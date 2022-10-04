@@ -17,11 +17,15 @@ public class Job {
     private String name;
     @NotEmpty
     private String job_description;
+    @NotEmpty
+    private String band_name;
 
-    public Job(int id, String name, String job_description) {
+
+    public Job(int id, String name, String job_description, String band_name) {
         this.id = id;
         this.name = name;
         this.job_description = job_description;
+        this.band_name = band_name;
     }
 
     public Job() {
@@ -47,7 +51,13 @@ public class Job {
         return job_description;
     }
 
-    public void setJob_description(String job_description) {
-        this.job_description = job_description;
+    public void setJob_description(String job_description) {this.job_description = job_description;}
+
+    public String getBand_name() {
+        return band_name;
+    }
+
+    public void setBand_name(String band_name) {
+        this.band_name = band_name;
     }
 }
