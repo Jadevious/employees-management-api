@@ -5,13 +5,13 @@ CREATE TABLE IF NOT EXISTS job_roles (
 id smallint PRIMARY KEY AUTO_INCREMENT,
 name varchar(50),
 job_description varchar(500),
-band_id smallint,
+band_id smallint NOT NULL,
 FOREIGN KEY (band_id) REFERENCES band_levels(band_id)
 );
 
-CREATE TABLE IF NOT EXISTS band_levels (
-band_id smallint PRIMARY KEY AUTO_INCREMENT,
-band_name varchar(25)
+CREATE TABLE IF NOT EXISTS bands (
+id smallint PRIMARY KEY AUTO_INCREMENT,
+name varchar(25)
 );
 
 -- Engineering Capability
@@ -33,11 +33,11 @@ INSERT INTO job_roles (name, job_description) VALUES ('Financials Consultant','Y
 INSERT INTO job_roles (name, job_description) VALUES ('Data Consultants','You’ll work as part of a team to support the implementation and configuration of enterprise-scale Workday solutions for our global customer base, focusing on checking, validating and transforming the customer’s organizational and employee data, and organizing it prior to loading in to the Workday tenants. You will work cooperatively with team members to understand customer requirements around the area of data, and with the guidance from senior consultants, deliver solutions that are aligned to customer needs.', 5);
 
 -- Band Levels/Management Levels
-INSERT INTO band_levels(band_name) VALUES ("Apprentice");
-INSERT INTO band_levels(band_name) VALUES ("Trainee");
-INSERT INTO band_levels(band_name) VALUES ("Associate");
-INSERT INTO band_levels(band_name) VALUES ("Senior Associate");
-INSERT INTO band_levels(band_name) VALUES ("Consultant");
-INSERT INTO band_levels(band_name) VALUES ("Manager");
-INSERT INTO band_levels(band_name) VALUES ("Principal");
-INSERT INTO band_levels(band_name) VALUES ("Leadership Community");
+INSERT INTO bands(name) VALUES ("Apprentice");
+INSERT INTO bands(name) VALUES ("Trainee");
+INSERT INTO bands(name) VALUES ("Associate");
+INSERT INTO bands(name) VALUES ("Senior Associate");
+INSERT INTO bands(name) VALUES ("Consultant");
+INSERT INTO bands(name) VALUES ("Manager");
+INSERT INTO bands(name) VALUES ("Principal");
+INSERT INTO bands(name) VALUES ("Leadership Community");
