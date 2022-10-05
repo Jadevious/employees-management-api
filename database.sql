@@ -11,7 +11,7 @@ FOREIGN KEY (band_id) REFERENCES band_levels(band_id)
 
 CREATE TABLE IF NOT EXISTS bands (
 id smallint PRIMARY KEY AUTO_INCREMENT,
-name varchar(25)
+name ENUM('Apprentice', 'Trainee', 'Associate', 'Senior Associate', 'Consultant', 'Manager', 'Principal', 'Leadership Community') NOT NULL
 );
 
 -- Engineering Capability
