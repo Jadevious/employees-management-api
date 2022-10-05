@@ -4,11 +4,15 @@ USE groupc_kainos_recruitment_JenniferC;
 CREATE TABLE IF NOT EXISTS job_roles (
 id smallint PRIMARY KEY AUTO_INCREMENT,
 name varchar(50) NOT NULL,
-job_description varchar(500) NOT NULL,
-job_specification varchar(255),
-job_responsibilities mediumtext,
-capability varchar(50)
+description varchar(500) NOT NULL,
+specification varchar(255),
+responsibilities mediumtext,
+capability enum ('Engineering', 'Platforms', 'Data', 'Artificial Intelligence',
+'Cyber Security', 'Workday', 'Experience Design', 'Product', 'Delivery', 'Operations',
+'Business Development and Marketing', 'Organisational Strategy and Planning',
+ 'People', 'Commercial and Financial Management', 'Business Services Support')
 );
+
 
 
 -- Engineering Capability
