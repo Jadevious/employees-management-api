@@ -1,12 +1,8 @@
 package com.kainos.ea.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.checkerframework.checker.signature.qual.Identifier;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 public class Job {
 
@@ -16,15 +12,18 @@ public class Job {
     @NotEmpty
     private String name;
     @NotEmpty
-    private String job_description;
+    private String description;
     @NotEmpty
     private String specification;
+    @NotEmpty
+    private String responsibilities;
 
-    public Job(int id, String name, String job_description, String specification) {
+    public Job(int id, String name, String description, String specification, String responsibilities) {
         this.id = id;
         this.name = name;
-        this.job_description = job_description;
+        this.description = description;
         this.specification = specification;
+        this.responsibilities = responsibilities;
     }
 
     public Job() {
@@ -46,12 +45,12 @@ public class Job {
         this.name = name;
     }
 
-    public String getJob_description() {
-        return job_description;
+    public String getDescription() {
+        return description;
     }
 
-    public void setJob_description(String job_description) {
-        this.job_description = job_description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getSpecification() {
@@ -61,4 +60,8 @@ public class Job {
     public void setSpecification(String specification) {
         this.specification = specification;
     }
+
+    public String getResponsibilities() {return responsibilities;}
+
+    public void setResponsibilities(String responsibilities) {this.responsibilities = responsibilities;}
 }
