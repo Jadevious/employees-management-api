@@ -2,6 +2,7 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobsDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.models.CareerLattice;
 import com.kainos.ea.models.Job;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
@@ -50,4 +51,31 @@ class JobsRequestServiceTest {
         assertThrows(SQLException.class,
                 () -> jobsRequestService.getJobs());
     }
+
+    @Test
+    void getCareerLattice_shouldReturnListOfCareerLattice_whenDaoReturnsListOfCareerLattice() throws DatabaseConnectionException, SQLException {
+        List<CareerLattice> expected = new ArrayList<CareerLattice>();
+        expected.add(new CareerLattice(
+                "Software Engineer",
+                "Engineering",
+                "Trainee",
+                "Engineering"
+        ));
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getCareerLattice(conn)).thenReturn(expected);
+
+        List<CareerLattice> actual = jobsRequestService.getCareerLattice();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void getCareerLattice_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getCareerLattice(conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobsRequestService.getCareerLattice());
+    }
+
 }

@@ -35,4 +35,16 @@ public class RecruitmentRequests {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
+
+    @GET
+    @Path("/role-matrix")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCareerLattice() {
+        try {
+            return Response.ok(jobService.getCareerLattice()).build();
+        } catch (SQLException | DatabaseConnectionException e) {
+            System.out.println("Error getting Career Lattice: " + e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
 }
