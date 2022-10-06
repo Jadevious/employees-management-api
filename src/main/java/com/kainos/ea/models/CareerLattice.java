@@ -5,23 +5,23 @@ import javax.validation.constraints.NotEmpty;
 public class CareerLattice {
 
     @NotEmpty
-    String jobRoleName;
+    String job_role_name;
 
     @NotEmpty
     String capability;
 
     @NotEmpty
-    String bandName;
+    String band_name;
 
     @NotEmpty
-    String jobFamilyName;
+    String job_family_name;
 
-    public String getJobRoleName() {
-        return jobRoleName;
+    public String getJob_role_name() {
+        return job_role_name;
     }
 
-    public void setJobRoleName(String jobRoleName) {
-        this.jobRoleName = jobRoleName;
+    public void setJob_role_name(String job_role_name) {
+        this.job_role_name = job_role_name;
     }
 
     public String getCapability() {
@@ -32,27 +32,27 @@ public class CareerLattice {
         this.capability = capability;
     }
 
-    public String getBandName() {
-        return bandName;
+    public String getBand_name() {
+        return band_name;
     }
 
-    public void setBandName(String bandName) {
-        this.bandName = bandName;
+    public void setBand_name(String band_name) {
+        this.band_name = band_name;
     }
 
-    public String getJobFamilyName() {
-        return jobFamilyName;
+    public String getJob_family_name() {
+        return job_family_name;
     }
 
-    public void setJobFamilyName(String jobFamilyName) {
-        this.jobFamilyName = jobFamilyName;
+    public void setJob_family_name(String job_family_name) {
+        this.job_family_name = job_family_name;
     }
 
-    public CareerLattice (String jobRoleName, String capability, String bandName, String jobFamilyName) {
-        this.jobRoleName = jobRoleName;
+    public CareerLattice (String job_role_name, String capability, String band_name, String job_family_name) {
+        this.job_role_name = job_role_name;
         this.capability = capability;
-        this.bandName = jobFamilyName;
-        this.jobFamilyName = jobFamilyName;
+        this.band_name = job_family_name;
+        this.job_family_name = job_family_name;
     }
 
 }
