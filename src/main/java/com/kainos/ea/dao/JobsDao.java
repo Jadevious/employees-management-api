@@ -12,7 +12,7 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT id, name, description, bands.name FROM job_roles JOIN bands USING(id)");
+        PreparedStatement statement = c.prepareStatement("SELECT id, job_roles.name, description, responsibilities, bands.name FROM job_roles JOIN bands USING(id)");
         ResultSet rs = statement.executeQuery();
 
         if (!rs.isBeforeFirst()) {
@@ -21,7 +21,7 @@ public class JobsDao {
 
         List<Job> jobs = new ArrayList<>();
         while (rs.next()) {
-            jobs.add(new Job(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            jobs.add(new Job(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
         }
         return jobs;
     }

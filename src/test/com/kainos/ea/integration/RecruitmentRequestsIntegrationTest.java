@@ -21,7 +21,7 @@ public class RecruitmentRequestsIntegrationTest {
     );
 
     @Test
-    void getEmployees_shouldReturnListOfEmployees() {
+    void getJobs_shouldReturnListOfJobs() {
         List<Job> response = APP.client().target("http://localhost:8080/api/job-roles")
                 .request()
                 .get(List.class);
