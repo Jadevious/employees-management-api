@@ -17,11 +17,14 @@ public class Job {
     private String name;
     @NotEmpty
     private String job_description;
+    @NotEmpty
+    private String specification;
 
-    public Job(int id, String name, String job_description) {
+    public Job(int id, String name, String job_description, String specification) {
         this.id = id;
         this.name = name;
         this.job_description = job_description;
+        this.specification = specification;
     }
 
     public Job() {
@@ -49,5 +52,13 @@ public class Job {
 
     public void setJob_description(String job_description) {
         this.job_description = job_description;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 }
