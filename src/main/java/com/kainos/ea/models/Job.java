@@ -14,12 +14,11 @@ public class Job {
     @NotEmpty
     private String description;
     @NotEmpty
-    private String capability;
-
     private String responsibilities;
-
-
-
+    @NotEmpty
+    private String band;
+    @NotEmpty
+    private String capability;
 
     public Job() {
     }
@@ -30,11 +29,12 @@ public class Job {
         this.description = description;
     }
 
-    public Job(int id, String name, String description,String responsibilities, String capability) {
+    public Job(int id, String name, String description, String responsibilities, String band, String capability) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.responsibilities = responsibilities;
+        this.band = band;
         this.capability = capability;
     }
 
@@ -65,6 +65,14 @@ public class Job {
     public String getResponsibilities() {return responsibilities;}
 
     public void setResponsibilities(String responsibilities) {this.responsibilities = responsibilities;}
+
+    public String getBand() {
+        return band;
+    }
+
+    public void setBand(String band) {
+        this.band = band;
+    }
 
     public String getCapability() {
         return capability;
