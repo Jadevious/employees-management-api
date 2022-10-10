@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class JobsRequestServiceTest {
+class ServiceTests {
 
     JobsDao jobsDao = Mockito.mock(JobsDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
