@@ -18,15 +18,25 @@ public class Job {
     @NotEmpty
     private String responsibilities;
 
-    public Job(int id, String name, String description, String specification, String responsibilities) {
+    private String capability;
+
+
+    public Job() {
+    }
+
+    public Job(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Job(int id, String name, String description, String specification, String responsibilities, String capability) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.specification = specification;
         this.responsibilities = responsibilities;
-    }
-
-    public Job() {
+        this.capability = capability;
     }
 
     public int getId() {
@@ -64,4 +74,13 @@ public class Job {
     public String getResponsibilities() {return responsibilities;}
 
     public void setResponsibilities(String responsibilities) {this.responsibilities = responsibilities;}
+
+    public String getCapability() {
+        return capability;
+    }
+
+    public void setCapability(String capability) {
+        this.capability = capability;
+    }
+
 }

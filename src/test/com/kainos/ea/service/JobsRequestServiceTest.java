@@ -34,8 +34,10 @@ class JobsRequestServiceTest {
                 "Software Engineer",
                 "Develops Software for Kainos",
                 "https://example.org",
-                "Experience of building and testing modern software applications"
+                "Experience of building and testing modern software applications",
+                "Engineering"
         ));
+
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobsDao.getJobs(conn)).thenReturn(expected);
 

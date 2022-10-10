@@ -12,7 +12,8 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT id, name, description, specification, responsibilities FROM job_roles");
+
+        PreparedStatement statement = c.prepareStatement("SELECT id, name, description, specification, responsibilities, capability FROM job_roles");
         ResultSet rs = statement.executeQuery();
 
         if (!rs.isBeforeFirst()) {
@@ -26,7 +27,8 @@ public class JobsDao {
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
-                    rs.getString(5)));
+                    rs.getString(5),
+                    rs.getString(6)));
         }
         return jobs;
     }
