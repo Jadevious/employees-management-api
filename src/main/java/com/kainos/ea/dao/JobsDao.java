@@ -12,7 +12,8 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT id, job_roles.name, description, responsibilities, bands.name, capability FROM job_roles JOIN bands USING(id)");
+        PreparedStatement statement = c.prepareStatement("SELECT id, job_roles.name, description, specification, responsibilities, bands.name, capability " +
+                "FROM job_roles JOIN bands USING(id)");
 
         ResultSet rs = statement.executeQuery();
 
@@ -27,7 +28,8 @@ public class JobsDao {
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
-                    rs.getString(6)));
+                    rs.getString(6),
+                    rs.getString(7)));
         }
         return jobs;
     }
