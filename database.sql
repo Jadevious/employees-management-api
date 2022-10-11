@@ -11,7 +11,7 @@ name enum ('Engineering', 'Platforms', 'Data', 'Artificial Intelligence',
 
 CREATE TABLE IF NOT EXISTS bands (
 id smallint PRIMARY KEY AUTO_INCREMENT,
-name ENUM('Apprentice', 'Trainee', 'Associate', 'Senior Associate', 'Consultant', 'Manager', 'Principal', 'Leadership Community') NOT NULL
+name enum('Apprentice', 'Trainee', 'Associate', 'Senior Associate', 'Consultant', 'Manager', 'Principal', 'Leadership Community') NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS job_roles (

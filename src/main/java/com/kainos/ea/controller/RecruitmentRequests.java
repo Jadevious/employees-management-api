@@ -35,4 +35,28 @@ public class RecruitmentRequests {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
+
+    @GET
+    @Path("/bands")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBands() {
+        try {
+            return Response.ok(jobService.getBands()).build();
+        } catch (SQLException | DatabaseConnectionException e) {
+            System.out.println("Error getting bands: " + e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
+
+    @GET
+    @Path("/capabilities")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCapabilities() {
+        try {
+            return Response.ok(jobService.getCapabilities()).build();
+        } catch (SQLException | DatabaseConnectionException e) {
+            System.out.println("Error getting capabilities: " + e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
 }

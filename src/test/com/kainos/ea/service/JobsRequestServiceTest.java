@@ -2,6 +2,8 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobsDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.models.Band;
+import com.kainos.ea.models.Capability;
 import com.kainos.ea.models.Job;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
@@ -52,5 +54,37 @@ class JobsRequestServiceTest {
 
         assertThrows(SQLException.class,
                 () -> jobsRequestService.getJobs());
+    }
+
+    @Test
+    void getbands_shouldReturnListOfBands_whenDaoReturnsListOfBands() throws DatabaseConnectionException, SQLException {
+        List<Band> expected = new ArrayList<Band>();
+        expected.add(new Band(
+                1,
+                "Associate"
+        ));
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getBands(conn)).thenReturn(expected);
+
+        List<Band> actual = jobsRequestService.getBands();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    void getcapabilities_shouldReturnListOfCapabilities_whenDaoReturnsListOfCapabilities() throws DatabaseConnectionException, SQLException {
+        List<Capability> expected = new ArrayList<Capability>();
+        expected.add(new Capability(
+                1,
+                "Experience Design"
+        ));
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getCapabilities(conn)).thenReturn(expected);
+
+        List<Capability> actual = jobsRequestService.getCapabilities();
+
+        assertEquals(actual, expected);
     }
 }
