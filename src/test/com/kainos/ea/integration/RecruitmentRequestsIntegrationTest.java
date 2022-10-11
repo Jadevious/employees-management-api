@@ -28,4 +28,19 @@ public class RecruitmentRequestsIntegrationTest {
 
         Assertions.assertTrue(response.size() > 0);
     }
+    @Test
+    void deleteJobRole_shouldReturnJobSuccessfullyDeletedMessage() {
+        Job job =new Job(
+                1,
+                "Software Engineer",
+                "Develops Software for Kainos",
+                "Apprentice",
+                "Experience of building and testing modern software applications",
+                "Engineering");
+        String actualResponse = APP.client().target("http://localhost:8080/api/delete-job/"+job.getId())
+                .request()
+                .delete(String.class);
+        String expectedResponse = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
+        Assertions.assertEquals(actualResponse,expectedResponse);
+    }
 }

@@ -7,9 +7,7 @@ import com.kainos.ea.util.DatabaseConnector;
 
 import org.eclipse.jetty.http.HttpStatus;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -32,6 +30,18 @@ public class RecruitmentRequests {
             return Response.ok(jobService.getJobs()).build();
         } catch (SQLException | DatabaseConnectionException e) {
             System.out.println("Error getting jobs: " + e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
+
+    @DELETE
+    @Path("/delete-job/{jobID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJobRole(@PathParam("jobID") int jobID){
+        try{
+            return Response.ok(jobService.deleteJobRole(jobID)).build();
+        }catch(SQLException | DatabaseConnectionException e){
+            System.out.println("Error deleting job: " + e);
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }

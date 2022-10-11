@@ -20,4 +20,8 @@ public class JobsRequestService {
     public List<Job> getJobs() throws DatabaseConnectionException, SQLException {
         return dao.getJobs(connector.getConnection());
     }
+
+    public String deleteJobRole(int jobID) throws DatabaseConnectionException, SQLException{
+        return dao.deleteJob(jobID,connector.getConnection());
+    }
 }

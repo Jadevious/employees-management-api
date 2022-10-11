@@ -31,4 +31,32 @@ public class JobsDao {
         }
         return jobs;
     }
+
+    public String deleteJob(int jobID,Connection c) throws SQLException, DatabaseConnectionException {
+        String message="";
+        Statement st = c.createStatement();
+
+        PreparedStatement statement = c.prepareStatement("SELECT * FROM job_roles WHERE id = "+ jobID +";");
+
+        ResultSet rs = statement.executeQuery();
+
+        if (!rs.isBeforeFirst()) {
+             message = "There are no jobs with this ID in the job_roles table";
+        }
+        while (rs.next()) {
+            Job job = new Job(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6));
+            PreparedStatement DeleteStatement = c.prepareStatement("DELETE FROM job_roles WHERE id = "+ job.getId() +";");
+            DeleteStatement.executeUpdate();
+            message = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
+
+
+
+        }
+        return message;
+    }
 }
