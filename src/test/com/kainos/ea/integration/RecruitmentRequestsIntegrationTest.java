@@ -34,8 +34,9 @@ public class RecruitmentRequestsIntegrationTest {
                 1,
                 "Software Engineer",
                 "Develops Software for Kainos",
-                "Apprentice",
+                "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbTM1UOLa0VBvOttkOL3ZNoB0sMjehxvkAaNQEj2dqKMbA?e=iXpeUf",
                 "Experience of building and testing modern software applications",
+                "Apprentice",
                 "Engineering");
         String actualResponse = APP.client().target("http://localhost:8080/api/delete-job/"+job.getId())
                 .request()

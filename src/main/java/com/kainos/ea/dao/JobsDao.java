@@ -51,7 +51,8 @@ public class JobsDao {
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
-                    rs.getString(6));
+                    rs.getString(6),
+                    rs.getString(7));
             PreparedStatement DeleteStatement = c.prepareStatement("DELETE FROM job_roles WHERE id = "+ job.getId() +";");
             DeleteStatement.executeUpdate();
             message = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
