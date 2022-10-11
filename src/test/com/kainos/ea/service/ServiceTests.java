@@ -33,9 +33,12 @@ class ServiceTests {
                 1,
                 "Software Engineer",
                 "Develops Software for Kainos",
-                "Apprentice",
+                "https://example.org",
                 "Experience of building and testing modern software applications",
-                "Engineering"));
+                "Apprentice",
+                "Engineering"
+        ));
+
 
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobsDao.getJobs(conn)).thenReturn(expected);
