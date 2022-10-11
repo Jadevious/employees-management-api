@@ -22,13 +22,8 @@ public class DatabaseConnector {
         if ( conn != null ) return conn;
 
         try {
-
-            FileInputStream propsStream = new FileInputStream("./src/main/resources/db.properties");
-
-            Properties props = new Properties();
-            props.load(propsStream);
-
             user = System.getenv("DB_USERNAME");
+            System.out.println(System.getenv("DB_USERNAME"));
             password = System.getenv("DB_PASSWORD");
             host = System.getenv("DB_HOST");
             db = System.getenv("DB_NAME");
