@@ -39,7 +39,7 @@ jobs:
       - name: Setting env variables
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: kainos-recruitment-api
+          ECR_REPOSITORY: employee_demo
           IMAGE_TAG: team3-api
           USERNAME: ${{ secrets.DB_USERNAME }}
           PASSWORD: ${{ secrets.DB_PASSWORD }}
