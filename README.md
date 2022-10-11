@@ -12,7 +12,7 @@ Connect to your MySQL server from the command line using the following command c
 
     $ mysql -h `host` -u `user` -p `password`
 
-Create an empty database and use it. You then can import the given database.sql file found in the github repository by typing:
+Create an empty database and use it. You then can import the given database.sql file found in the github repository by running:
 
     $ mysql source /path/to/database.sql;
     
@@ -53,4 +53,3 @@ To check that your application is running enter url `http://localhost:8080`
 You can run the tests contained in the project simply by running the following command.
 
     $ mvn clean test
-
