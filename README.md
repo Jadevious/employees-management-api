@@ -12,7 +12,7 @@ Connect to your MySQL server from the command line using the following command c
 
     $ mysql -h `host` -u `user` -p `password`
 
-You can import the given database.sql file found in the github repository by typing:
+Create an empty database and use it. You then can import the given database.sql file found in the github repository by typing:
 
     $ mysql source /path/to/database.sql;
     
