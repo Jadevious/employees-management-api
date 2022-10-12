@@ -4,7 +4,7 @@ import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.models.Band;
 import com.kainos.ea.models.Capability;
 import com.kainos.ea.models.Job;
-import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.models.JobRequest;
 
 import java.sql.*;
 
@@ -68,5 +68,32 @@ public class JobsDao {
                     rs.getString(2)));
         }
         return capabilities;
+    }
+
+    public int insertNewRole(JobRequest role, Connection c) throws SQLException{
+        int roleNo = 0;
+        String insertNewRoleQuery = "insert into job_roles (name, description, responsibilities, capability, band_id)"
+                + " values (?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStmt = c.prepareStatement(insertNewRoleQuery, Statement.RETURN_GENERATED_KEYS);
+        preparedStmt.setString(1, role.getName());
+        preparedStmt.setString(2, role.getDescription());
+        preparedStmt.setString(3, role.getResponsibilities());
+        preparedStmt.setInt(4, role.getCapability_id());
+        preparedStmt.setInt(5, role.getBand_id());
+
+        int affectedRows = preparedStmt.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating new role failed, no rows affected.");
+        }
+
+        try (ResultSet rs = preparedStmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                roleNo = rs.getInt(1);
+            }
+        }
+
+        return roleNo;
     }
 }
