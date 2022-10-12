@@ -20,6 +20,8 @@ public class Job {
     @NotEmpty
     private String band;
     @NotEmpty
+    private int bandID;
+    @NotEmpty
     private String capability;
 
     public Job() {
@@ -29,6 +31,16 @@ public class Job {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Job(String name, String description,  String specification, String responsibilities, int bandID, String capability) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.specification = specification;
+        this.responsibilities =responsibilities;
+        this.bandID = bandID;
+        this.capability = capability;
     }
 
     public Job(int id, String name, String description, String specification, String responsibilities, String band, String capability) {
@@ -83,6 +95,13 @@ public class Job {
 
     public void setBand(String band) {
         this.band = band;
+    }
+
+    public int getBandID() {
+        return bandID;
+    }
+    public void setBandID(int bandID) {
+        this.bandID = bandID;
     }
 
     public String getCapability() {

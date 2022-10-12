@@ -56,4 +56,61 @@ class JobsRequestServiceTest {
         assertThrows(SQLException.class,
                 () -> jobsRequestService.getJobs());
     }
+
+    @Test
+    void deleteJobRoleShouldReturnCorrectDeleteMessageWhenDaoReturnsCorrectDeleteMessage() throws DatabaseConnectionException, SQLException {
+        Job job =new Job(
+                1,
+                "Software Engineer",
+                "Develops Software for Kainos",
+                "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbTM1UOLa0VBvOttkOL3ZNoB0sMjehxvkAaNQEj2dqKMbA?e=iXpeUf",
+                "Experience of building and testing modern software applications",
+                "Apprentice",
+                "Engineering");
+        String expected = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.deleteJob(job.getId(),conn)).thenReturn(expected);
+
+        String actual = jobsRequestService.deleteJobRole(job.getId());
+
+        assertEquals(expected,actual);
+
+
+    }
+    @Test
+    void deleteJobRoleShouldReturnJobIDNotInTableMessageWhenDaoReturnsJobIDNotInTableMessage() throws DatabaseConnectionException, SQLException {
+        Job job =new Job(
+                1,
+                "Software Engineer",
+                "Develops Software for Kainos",
+                "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbTM1UOLa0VBvOttkOL3ZNoB0sMjehxvkAaNQEj2dqKMbA?e=iXpeUf",
+                "Experience of building and testing modern software applications",
+                "Apprentice",
+                "Engineering");
+        String expected = "There are no jobs with this ID in the job_roles table";
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.deleteJob(job.getId(),conn)).thenReturn(expected);
+
+        String actual = jobsRequestService.deleteJobRole(job.getId());
+
+        assertEquals(expected,actual);
+
+
+    }
+    @Test
+    void deleteJobs_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        Job job =new Job(
+                1,
+                "Software Engineer",
+                "Develops Software for Kainos",
+                "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbTM1UOLa0VBvOttkOL3ZNoB0sMjehxvkAaNQEj2dqKMbA?e=iXpeUf",
+                "Experience of building and testing modern software applications",
+                "Apprentice",
+                "Engineering");
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.deleteJob(job.getId(),conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobsRequestService.deleteJobRole(job.getId()));
+    }
 }
