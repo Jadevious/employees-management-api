@@ -12,8 +12,8 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT id, job_roles.name, description, specification, responsibilities, bands.name, capability " +
-                "FROM job_roles JOIN bands USING(id)");
+        PreparedStatement statement = c.prepareStatement("SELECT job_roles.id, job_roles.name, description, specification, responsibilities, bands.name, capability " +
+                "FROM job_roles JOIN bands ON job_roles.band_id = bands.id");
 
         ResultSet rs = statement.executeQuery();
 
@@ -36,10 +36,7 @@ public class JobsDao {
 
     public String deleteJob(int jobID,Connection c) throws SQLException, DatabaseConnectionException {
         String message="";
-        Statement st = c.createStatement();
-
         PreparedStatement statement = c.prepareStatement("SELECT * FROM job_roles WHERE id = "+ jobID +";");
-
         ResultSet rs = statement.executeQuery();
 
         if (!rs.isBeforeFirst()) {
@@ -56,9 +53,6 @@ public class JobsDao {
             PreparedStatement DeleteStatement = c.prepareStatement("DELETE FROM job_roles WHERE id = "+ job.getId() +";");
             DeleteStatement.executeUpdate();
             message = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
-
-
-
         }
         return message;
     }
