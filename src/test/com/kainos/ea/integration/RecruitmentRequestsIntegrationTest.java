@@ -47,6 +47,38 @@ public class RecruitmentRequestsIntegrationTest {
                 "Experience of building and testing modern software applications",
                 6,
                 "Business Development and Marketing");
+
+        ResultSet rs = insertJobIntoDataBase(job);
+        int insertedJobID=0;
+        if (rs.next()){
+            insertedJobID = rs.getInt(1);
+        }
+        String actualResponse = APP.client().target("http://localhost:8080/api/delete-job/"+insertedJobID)
+                .request()
+                .delete(String.class);
+        String expectedResponse = "This job role has been deleted: ID: "+insertedJobID+", Name: "+job.getName();
+        Assertions.assertEquals(actualResponse,expectedResponse);
+    }
+
+    @Test
+    void deleteJobRole_shouldReturnJobDoesNotExistMessage() throws SQLException, DatabaseConnectionException {
+        Job job =new Job(200,
+                "Marketing Operations Manager",
+                "Develops Software for Kainos",
+                "https://kainossoftwareltd.sharepoint.com/:b:/g/people/EbTM1UOLa0VBvOttkOL3ZNoB0sMjehxvkAaNQEj2dqKMbA?e=iXpeUf",
+                "Experience of building and testing modern software applications",
+                "Engineering",
+                "Business Development and Marketing");
+
+        String actualResponse = APP.client().target("http://localhost:8080/api/delete-job/"+job.getId())
+                .request()
+                .delete(String.class);
+        String expectedResponse = "There are no jobs with this ID in the job_roles table";
+        Assertions.assertEquals(actualResponse,expectedResponse);
+    }
+
+
+    public ResultSet insertJobIntoDataBase(Job job) throws DatabaseConnectionException, SQLException {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection c =databaseConnector.getConnection();
         String sql = "INSERT INTO job_roles (name,description,specification,responsibilities,capability,band_id) VALUES(?,?,?,?,?,?);";
@@ -60,14 +92,7 @@ public class RecruitmentRequestsIntegrationTest {
 
         InsertStatement.executeUpdate();
         ResultSet rs = InsertStatement.getGeneratedKeys();
-        int insertedJobID=0;
-        if (rs.next()){
-            insertedJobID = rs.getInt(1);
-        }
-        String actualResponse = APP.client().target("http://localhost:8080/api/delete-job/"+insertedJobID)
-                .request()
-                .delete(String.class);
-        String expectedResponse = "This job role has been deleted: ID: "+insertedJobID+", Name: "+job.getName();
-        Assertions.assertEquals(actualResponse,expectedResponse);
+        return rs;
     }
+    
 }
