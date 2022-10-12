@@ -1,59 +1,20 @@
-package com.kainos.ea.integration;
+package com.kainos.ea.validator;
 
-import com.kainos.ea.models.Band;
-import com.kainos.ea.models.Capability;
-import com.kainos.ea.models.Job;
+import com.kainos.ea.exception.NameTooLongException;
+import com.kainos.ea.exception.DescriptionTooLongException;
+import com.kainos.ea.exception.SpecificationTooLongException;
+import com.kainos.ea.exception.ResponsibilitiesTooLongException;
 import com.kainos.ea.models.JobRequest;
-import com.kainos.ea.nameApplication;
-import com.kainos.ea.nameConfiguration;
-import io.dropwizard.testing.junit5.DropwizardAppExtension;
-import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(DropwizardExtensionsSupport.class)
-public class RecruitmentRequestsIntegrationTest {
+public class JobValidatorTest {
 
-    static final DropwizardAppExtension<nameConfiguration> APP = new DropwizardAppExtension<>(
-            nameApplication.class, null,
-            new ResourceConfigurationSourceProvider()
-    );
+    JobValidator jobValidator = new JobValidator();
 
     @Test
-    void getJobs_shouldReturnListOfJobs() {
-        List<Job> response = APP.client().target("http://localhost:8080/api/job-roles")
-                .request()
-                .get(List.class);
-
-        Assertions.assertTrue(response.size() > 0);
-    }
-
-    @Test
-    void getBands_shouldReturnListOfBands() {
-        List<Band> response = APP.client().target("http://localhost:8080/api/bands")
-                .request()
-                .get(List.class);
-
-        Assertions.assertTrue(response.size() > 0);
-    }
-
-    @Test
-    void getCapabilities_shouldReturnListOfCapabilities() {
-        List<Capability> response = APP.client().target("http://localhost:8080/api/capabilities")
-                .request()
-                .get(List.class);
-
-        Assertions.assertTrue(response.size() > 0);
-    }
-
-    @Test
-    void postNewRole_shouldReturnIdOfNewRole() {
+    public void isValidRole_shouldReturnTrue_whenValidRole() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer",
                 "Develops Software for Kainos",
@@ -63,16 +24,11 @@ public class RecruitmentRequestsIntegrationTest {
                 2
         );
 
-        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
-                .request()
-                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE))
-                .readEntity(Integer.class);
-
-        Assertions.assertNotNull(response);
+        assertTrue(jobValidator.isValidRole(jobRequest));
     }
 
     @Test
-    void postAdminNewRole_shouldReturnError400_whenNameTooLong() {
+    public void isValidRole_shouldReturnFalse_whenNameTooLong() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer Software Engineer Software Engineer Software Engineer Software Engineer Software Engineer Software Engineer Software Engineer",
                 "Develops Software for Kainos",
@@ -82,15 +38,12 @@ public class RecruitmentRequestsIntegrationTest {
                 2
         );
 
-        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
-                .request()
-                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE)).getStatus();
-
-        Assertions.assertEquals(response, 400);
+        assertThrows(NameTooLongException.class,
+                () -> jobValidator.isValidRole(jobRequest));
     }
 
     @Test
-    void postAdminNewRole_shouldReturnError400_whenDescriptionTooLong() {
+    public void isValidRole_shouldReturnFalse_whenDescriptionTooLong() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in scelerisque mauris. Sed elementum mi a bibendum suscipit. Phasellus ante justo, mollis et augue at, aliquam tincidunt sem. Nulla facilisi. Cras nec nibh eget metus blandit pretium. Proin vitae gravida leo, et molestie lorem. In ornare sit amet diam vel gravida.\n" +
@@ -102,15 +55,12 @@ public class RecruitmentRequestsIntegrationTest {
                 2
         );
 
-        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
-                .request()
-                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE)).getStatus();
-
-        Assertions.assertEquals(response, 400);
+        assertThrows(DescriptionTooLongException.class,
+                () -> jobValidator.isValidRole(jobRequest));
     }
 
     @Test
-    void postAdminNewRole_shouldReturnError400_whenSpecificationTooLong() {
+    public void isValidRole_shouldReturnFalse_whenSpecificationTooLong() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer",
                 "Develops Software for Kainos",
@@ -122,15 +72,12 @@ public class RecruitmentRequestsIntegrationTest {
                 2
         );
 
-        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
-                .request()
-                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE)).getStatus();
-
-        Assertions.assertEquals(response, 400);
+        assertThrows(SpecificationTooLongException.class,
+                () -> jobValidator.isValidRole(jobRequest));
     }
 
     @Test
-    void postAdminNewRole_shouldReturnError400_whenResponsibilitiesTooLong() {
+    public void isValidRole_shouldReturnFalse_whenResponsibilitiesTooLong() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer",
                 "Develops Software for Kainos",
@@ -142,10 +89,7 @@ public class RecruitmentRequestsIntegrationTest {
                 2
         );
 
-        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
-                .request()
-                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE)).getStatus();
-
-        Assertions.assertEquals(response, 400);
+        assertThrows(ResponsibilitiesTooLongException.class,
+                () -> jobValidator.isValidRole(jobRequest));
     }
 }

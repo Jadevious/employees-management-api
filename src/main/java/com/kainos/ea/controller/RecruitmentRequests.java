@@ -1,11 +1,12 @@
 package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.JobsDao;
-import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.*;
 import com.kainos.ea.models.Job;
 import com.kainos.ea.models.JobRequest;
 import com.kainos.ea.service.JobsRequestService;
 import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.validator.JobValidator;
 
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -18,10 +19,12 @@ import java.sql.SQLException;
 @Path("/api")
 public class RecruitmentRequests {
     private static JobsRequestService jobService;
+    private static JobValidator jobValidator;
 
     public RecruitmentRequests() {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         jobService = new JobsRequestService(new JobsDao(), databaseConnector);
+        jobValidator = new JobValidator();
     }
 
     @GET
@@ -66,12 +69,20 @@ public class RecruitmentRequests {
     @Produces(MediaType.APPLICATION_JSON)
     public static Response createNewRole(JobRequest role) throws DatabaseConnectionException {
         try {
-            int id = jobService.insertNewRole(role);
-            System.out.println(id);
-            return Response.status(HttpStatus.CREATED_201).entity(id).build();
-        } catch (Exception e) {
-            System.out.println(e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+            if (jobValidator.isValidRole(role)) {
+                try {
+                    int id = jobService.insertNewRole(role);
+                    System.out.println(id);
+                    return Response.status(HttpStatus.CREATED_201).entity(id).build();
+                } catch (Exception e) {
+                    System.out.println(e);
+                    return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+                }
+            } else {
+                return Response.status(HttpStatus.BAD_REQUEST_400).build();
+            }
+        } catch (NameTooLongException | DescriptionTooLongException | SpecificationTooLongException | ResponsibilitiesTooLongException e) {
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
 }
