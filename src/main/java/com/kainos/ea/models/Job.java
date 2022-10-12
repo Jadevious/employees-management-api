@@ -14,6 +14,8 @@ public class Job {
     @NotEmpty
     private String description;
     @NotEmpty
+    private String specification;
+    @NotEmpty
     private String responsibilities;
     @NotEmpty
     private String band;
@@ -29,10 +31,11 @@ public class Job {
         this.description = description;
     }
 
-    public Job(int id, String name, String description, String responsibilities, String band, String capability) {
+    public Job(int id, String name, String description, String specification, String responsibilities, String band, String capability) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.specification = specification;
         this.responsibilities = responsibilities;
         this.band = band;
         this.capability = capability;
@@ -62,6 +65,14 @@ public class Job {
         this.description = description;
     }
 
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
     public String getResponsibilities() {return responsibilities;}
 
     public void setResponsibilities(String responsibilities) {this.responsibilities = responsibilities;}
@@ -81,5 +92,4 @@ public class Job {
     public void setCapability(String capability) {
         this.capability = capability;
     }
-
 }

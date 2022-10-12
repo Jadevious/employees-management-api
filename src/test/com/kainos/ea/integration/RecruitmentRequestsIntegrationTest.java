@@ -57,6 +57,7 @@ public class RecruitmentRequestsIntegrationTest {
         JobRequest jobRequest = new JobRequest(
                 "Software Engineer",
                 "Develops Software for Kainos",
+                "https://example.org",
                 "Experience of building and testing modern software applications",
                 1,
                 2

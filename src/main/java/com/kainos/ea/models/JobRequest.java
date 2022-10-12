@@ -13,6 +13,8 @@ public class JobRequest {
     @NotEmpty
     private String description;
     @NotEmpty
+    private String specification;
+    @NotEmpty
     private String responsibilities;
     @NotEmpty
     private int capability_id;
@@ -20,10 +22,11 @@ public class JobRequest {
     private int band_id;
 
     @JsonCreator
-    public JobRequest(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("responsibilities") String responsibilities,
-                      @JsonProperty("capability") int capability_id, @JsonProperty("band_id") int band_id) {
+    public JobRequest(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("specification") String specification,
+                      @JsonProperty("responsibilities") String responsibilities, @JsonProperty("capability") int capability_id, @JsonProperty("band_id") int band_id) {
         this.setName(name);
         this.setDescription(description);
+        this.setSpecification(specification);
         this.setResponsibilities(responsibilities);
         this.setCapability_id(capability_id);
         this.setBand_id(band_id);
@@ -36,6 +39,10 @@ public class JobRequest {
     public String getDescription() { return description; }
 
     public void setDescription(String description) { this.description = description; }
+
+    public String getSpecification() { return specification; }
+
+    public void setSpecification(String specification) { this.specification = specification; }
 
     public String getResponsibilities() { return responsibilities; }
 
