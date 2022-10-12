@@ -43,16 +43,10 @@ public class JobsDao {
              message = "There are no jobs with this ID in the job_roles table";
         }
         while (rs.next()) {
-            Job job = new Job(rs.getInt(1),
-                    rs.getString(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getString(6),
-                    rs.getString(7));
-            PreparedStatement DeleteStatement = c.prepareStatement("DELETE FROM job_roles WHERE id = "+ job.getId() +";");
+                    String name = rs.getString(2);
+            PreparedStatement DeleteStatement = c.prepareStatement("DELETE FROM job_roles WHERE id = "+ jobID +";");
             DeleteStatement.executeUpdate();
-            message = "This job role has been deleted: ID: "+job.getId()+", Name: "+job.getName();
+            message = "This job role has been deleted: ID: "+jobID+", Name: "+name;
         }
         return message;
     }
