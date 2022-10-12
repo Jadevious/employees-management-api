@@ -48,7 +48,7 @@ public class RecruitmentRequestsIntegrationTest {
                 6,
                 "Business Development and Marketing");
 
-        ResultSet rs = insertJobIntoDataBase(job);
+        ResultSet rs = createJob(job);
         int insertedJobID=0;
         if (rs.next()){
             insertedJobID = rs.getInt(1);
@@ -78,7 +78,7 @@ public class RecruitmentRequestsIntegrationTest {
     }
 
 
-    public ResultSet insertJobIntoDataBase(Job job) throws DatabaseConnectionException, SQLException {
+    public ResultSet createJob(Job job) throws DatabaseConnectionException, SQLException {
         DatabaseConnector databaseConnector = new DatabaseConnector();
         Connection c =databaseConnector.getConnection();
         String sql = "INSERT INTO job_roles (name,description,specification,responsibilities,capability,band_id) VALUES(?,?,?,?,?,?);";
@@ -94,5 +94,5 @@ public class RecruitmentRequestsIntegrationTest {
         ResultSet rs = InsertStatement.getGeneratedKeys();
         return rs;
     }
-    
+
 }
