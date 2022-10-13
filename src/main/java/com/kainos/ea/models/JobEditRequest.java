@@ -2,6 +2,7 @@ package com.kainos.ea.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.checkerframework.checker.signature.qual.Identifier;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -12,6 +13,7 @@ public class JobEditRequest extends JobRequest{
 
     public void setId(int id) {this.id = id;}
 
+    @Identifier
     @NotEmpty
     private int id;
     @JsonCreator

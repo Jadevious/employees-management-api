@@ -8,7 +8,7 @@ import com.kainos.ea.exception.ResponsibilitiesTooLongException;
 import com.kainos.ea.models.JobRequest;
 
 public class JobValidator {
-    public boolean isValidRole(JobRequest role) throws NameTooLongException, DescriptionTooLongException, SpecificationTooLongException, ResponsibilitiesTooLongException {
+    public static boolean isValidRole(JobRequest role) throws NameTooLongException, DescriptionTooLongException, SpecificationTooLongException, ResponsibilitiesTooLongException {
         if (role.getName().length() > 50) {
             throw new NameTooLongException();
         }
