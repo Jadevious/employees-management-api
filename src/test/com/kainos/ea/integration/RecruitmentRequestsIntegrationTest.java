@@ -83,6 +83,7 @@ public class RecruitmentRequestsIntegrationTest {
                 .put(Entity.entity (editRequest, MediaType.APPLICATION_JSON_TYPE))
                 .readEntity (String.class);
 
+        System.out.println (response);
         Assertions.assertEquals("Role successfully updated", response);
     }
 
@@ -178,8 +179,5 @@ public class RecruitmentRequestsIntegrationTest {
 
         Assertions.assertEquals(response, 400);
     }
-
-
-
 
 }
