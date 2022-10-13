@@ -2,9 +2,7 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobsDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.models.Band;
-import com.kainos.ea.models.Capability;
-import com.kainos.ea.models.Job;
+import com.kainos.ea.models.*;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.SQLException;
@@ -31,7 +29,12 @@ public class JobsRequestService {
         return dao.getBands(connector.getConnection());
     }
 
-    public Job getJob(int id) throws DatabaseConnectionException, SQLException {
+    public Job getJobById(int id) throws DatabaseConnectionException, SQLException {
         return dao.getJob(id, connector.getConnection());
     }
+
+    public String editJobRole(JobEditRequest role) throws DatabaseConnectionException, SQLException {
+        return dao.editJobRole(role, connector.getConnection());
+    }
+
 }

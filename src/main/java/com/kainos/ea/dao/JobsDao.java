@@ -1,9 +1,7 @@
 package com.kainos.ea.dao;
 
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.models.Band;
-import com.kainos.ea.models.Capability;
-import com.kainos.ea.models.Job;
+import com.kainos.ea.models.*;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.*;
@@ -88,5 +86,31 @@ public class JobsDao {
             job = new Job (rs.getInt (1), rs.getString (2), rs.getString (3), rs.getString (4), rs.getString (5), rs.getString(6), rs.getString (7));
         }
         return job;
+    }
+
+    public String editJobRole(JobEditRequest role, Connection c) throws SQLException, DatabaseConnectionException {
+        Statement st = c.createStatement ();
+        String editRoleQuery = "UPDATE job_roles SET name = ?, description = ?, specification = ?, responsibilities = ?, capability = ?, band_id = ? WHERE id = ?";
+
+        PreparedStatement preparedStmt = c.prepareStatement(editRoleQuery);
+        preparedStmt.setString(1, role.getName());
+        preparedStmt.setString(2, role.getDescription());
+        preparedStmt.setString(3, role.getSpecification());
+        preparedStmt.setString(4, role.getResponsibilities());
+        preparedStmt.setInt(5, role.getCapability_id());
+        preparedStmt.setInt(6, role.getBand_id());
+        preparedStmt.setInt(7, role.getId());
+
+        int affectedRows = preparedStmt.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Updating role failed, no rows affected.");
+        }
+        else if (affectedRows > 1) {
+            throw new SQLException ("More than one entry has been updated, please check the database for changes");
+        }
+
+        return "Role successfully updated";
+
     }
 }

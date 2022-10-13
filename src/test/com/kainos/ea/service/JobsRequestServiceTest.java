@@ -5,6 +5,7 @@ import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.models.Band;
 import com.kainos.ea.models.Capability;
 import com.kainos.ea.models.Job;
+import com.kainos.ea.models.JobEditRequest;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -106,7 +107,7 @@ class JobsRequestServiceTest {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobsDao.getJob(id, conn)).thenReturn(expected);
 
-        Job actual = jobsRequestService.getJob(id);
+        Job actual = jobsRequestService.getJobById (id);
 
         assertEquals(actual, expected);
     }
@@ -117,6 +118,42 @@ class JobsRequestServiceTest {
         Mockito.when(jobsDao.getJob(id, conn)).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                () -> jobsRequestService.getJob(id));
+                () -> jobsRequestService.getJobById (id));
+    }
+
+    @Test
+    void editJob_shouldReturnSuccessfullyUpdatedMessage_whenDaoReturnsJob() throws DatabaseConnectionException, SQLException {
+        JobEditRequest expected = (new JobEditRequest (
+                1,
+                "Software Developer",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                1));
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.editJobRole (expected, conn)).thenReturn("Role successfully updated");
+
+        String actual = jobsRequestService.editJobRole (expected);
+
+        assertEquals(actual, "Role successfully updated" );
+    }
+
+    @Test
+    void editJob_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        JobEditRequest expected = (new JobEditRequest (
+                1,
+                "Software Developer",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                1));
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.editJobRole (expected, conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobsRequestService.editJobRole (expected));
     }
 }
