@@ -22,14 +22,6 @@ public class Job {
     @NotEmpty
     private String capability;
 
-    public Job() {
-    }
-
-    public Job(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public Job(int id, String name, String description, String specification, String responsibilities, String band, String capability) {
         this.id = id;

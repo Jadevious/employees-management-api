@@ -20,6 +20,12 @@ id smallint PRIMARY KEY AUTO_INCREMENT,
 name ENUM('Apprentice', 'Trainee', 'Associate', 'Senior Associate', 'Consultant', 'Manager', 'Principal', 'Leadership Community') NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS users (
+id smallint PRIMARY KEY AUTO_INCREMENT,
+username varchar(50) NOT NULL,
+password varchar(100) NOT NULL
+);
+
 -- Engineering Capability
 INSERT INTO job_roles (name, description, specification, responsibilities, capability, band_id)
 VALUES (
@@ -118,3 +124,5 @@ INSERT INTO bands (name) VALUES ('Consultant');
 INSERT INTO bands (name) VALUES ('Manager');
 INSERT INTO bands (name) VALUES ('Principal');
 INSERT INTO bands (name) VALUES ('Leadership Community');
+
+INSERT INTO users (username, password) VALUES ('Abiye', '$2a$10$tRi9MgRYZv0gC./N6owdxua9FNqoPmbjIMwH6yWR92i5ruW1gZrJm');

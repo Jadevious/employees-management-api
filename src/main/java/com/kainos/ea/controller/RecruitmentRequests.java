@@ -9,9 +9,7 @@ import com.kainos.ea.util.DatabaseConnector;
 
 import org.eclipse.jetty.http.HttpStatus;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -51,6 +49,21 @@ public class RecruitmentRequests {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
+
+//    @POST
+//    @Path("/users/")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response checkUser(@PathParam("username") String username) {
+//        try {
+//            return Response.ok(userService.findUser(username)).build();
+//        } catch (SQLException | DatabaseConnectionException e) {
+//            System.out.println("Error getting user: " + e);
+//            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+//        }
+//    }
+
+
+
 
 
 }

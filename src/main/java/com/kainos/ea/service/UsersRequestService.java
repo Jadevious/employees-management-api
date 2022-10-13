@@ -6,6 +6,9 @@ import com.kainos.ea.models.Job;
 import com.kainos.ea.models.User;
 import com.kainos.ea.util.DatabaseConnector;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,5 +22,9 @@ public class UsersRequestService {
 
     public List<User> getUsers() throws DatabaseConnectionException, SQLException {
         return dao.getUsers(connector.getConnection());
+    }
+
+    public List<User> findUser(String username) throws DatabaseConnectionException, SQLException {
+        return dao.findUser(username, connector.getConnection());
     }
 }
