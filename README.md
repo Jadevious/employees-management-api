@@ -43,7 +43,7 @@ You can install and build the maven project by running the following command.
 ### Starting the application
 You can start the application by running the following command.
 
-    $ java -jar target/kainos-recruitment-api-1.0-SNAPSHOT-sources.jar server config.yml
+    $ java -jar target/kainos-recruitment-api-1.0-SNAPSHOT.jar server config.yml
 
 
 To check that your application is running enter url `http://localhost:8080`
