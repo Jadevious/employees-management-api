@@ -72,7 +72,6 @@ public class RecruitmentRequests {
             if (jobValidator.isValidRole(role)) {
                 try {
                     int id = jobService.insertNewRole(role);
-                    System.out.println(id);
                     return Response.status(HttpStatus.CREATED_201).entity(id).build();
                 } catch (Exception e) {
                     System.out.println(e);
