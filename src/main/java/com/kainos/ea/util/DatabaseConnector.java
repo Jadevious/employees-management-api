@@ -22,21 +22,14 @@ public class DatabaseConnector {
         if ( conn != null ) return conn;
 
         try {
-
-            FileInputStream propsStream = new FileInputStream("./src/main/resources/db.properties");
-
-            Properties props = new Properties();
-            props.load(propsStream);
-
-            user = props.getProperty("user");
-            password = props.getProperty("password");
-            host = props.getProperty("host");
-            db = props.getProperty("db");
+            user = System.getenv("DB_USERNAME");
+            password = System.getenv("DB_PASSWORD");
+            host = System.getenv("DB_HOST");
+            db = System.getenv("DB_NAME");
 
             if ( user == null || password == null || host == null || db == null)
                 throw new IllegalArgumentException(
-                        "Properties file must exist and must contain "
-                                + "user, password, host and database name properties.");
+                        "Failed to retrieve environmental variables for database access (see readme for more info)");
 
 
             conn = DriverManager.getConnection("jdbc:mysql://"
