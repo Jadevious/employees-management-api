@@ -81,7 +81,6 @@ public class RecruitmentRequests {
             if (jobValidator.isValidRole(request)) {
                 try {
                     return Response.ok(jobService.editJobRole (request)).build();
-//                    return Response.status(HttpStatus.OK_200).entity(jobService.editJobRole (request)).build();
                 } catch (Exception e) {
                     System.out.println(e);
                     return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
