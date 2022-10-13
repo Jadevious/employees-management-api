@@ -12,8 +12,8 @@ import java.util.List;
 public class JobsDao {
     public List<Job> getJobs(Connection c) throws SQLException, DatabaseConnectionException {
         Statement st = c.createStatement();
-        PreparedStatement statement = c.prepareStatement("SELECT id, job_roles.name, description, specification, responsibilities, bands.name, capability " +
-                "FROM job_roles JOIN bands USING(id)");
+        PreparedStatement statement = c.prepareStatement("SELECT job_roles.id, job_roles.name, description, specification, responsibilities, bands.name, capability " +
+                "FROM job_roles JOIN bands ON job_roles.band_id = bands.id");
 
         ResultSet rs = statement.executeQuery();
 
