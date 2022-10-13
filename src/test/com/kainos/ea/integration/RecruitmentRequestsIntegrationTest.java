@@ -148,4 +148,22 @@ public class RecruitmentRequestsIntegrationTest {
 
         Assertions.assertEquals(response, 400);
     }
+
+    @Test
+    void postAdminNewRole_shouldReturnError400_whenNoNameIncluded() {
+        JobRequest jobRequest = new JobRequest(
+                "",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                2
+        );
+
+        int response = APP.client().target("http://localhost:8080/api/admin/new-role")
+                .request()
+                .post(Entity.entity(jobRequest, MediaType.APPLICATION_JSON_TYPE)).getStatus();
+
+        Assertions.assertEquals(response, 400);
+    }
 }

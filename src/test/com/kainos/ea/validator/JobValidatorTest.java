@@ -92,4 +92,18 @@ public class JobValidatorTest {
         assertThrows(ResponsibilitiesTooLongException.class,
                 () -> jobValidator.isValidRole(jobRequest));
     }
+
+    @Test
+    public void isValidRole_shouldReturnFalse_whenNoNameIncluded() throws NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
+        JobRequest jobRequest = new JobRequest(
+                "",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                2
+        );
+
+        assertFalse(jobValidator.isValidRole(jobRequest));
+    }
 }
