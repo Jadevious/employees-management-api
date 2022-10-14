@@ -1,5 +1,5 @@
 package com.kainos.ea.exception;
 
-public class NameTooLongException extends Throwable {
 
+public class NameTooLongException extends Throwable {
 }

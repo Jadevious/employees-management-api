@@ -2,11 +2,14 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.JobsDao;
 import com.kainos.ea.exception.*;
-import com.kainos.ea.models.Job;
+
+import com.kainos.ea.models.JobEditRequest;
+
 import com.kainos.ea.models.JobRequest;
 import com.kainos.ea.service.JobsRequestService;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.validator.JobValidator;
+
 
 import org.eclipse.jetty.http.HttpStatus;
 
@@ -22,9 +25,9 @@ public class RecruitmentRequests {
     private static JobValidator jobValidator;
 
     public RecruitmentRequests() {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        jobService = new JobsRequestService(new JobsDao(), databaseConnector);
-        jobValidator = new JobValidator();
+        DatabaseConnector databaseConnector = new DatabaseConnector ();
+        jobService = new JobsRequestService (new JobsDao (), databaseConnector);
+        jobValidator = new JobValidator ();
     }
 
     @GET
@@ -32,10 +35,10 @@ public class RecruitmentRequests {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getJobRoles() {
         try {
-            return Response.ok(jobService.getJobs()).build();
+            return Response.ok (jobService.getJobs ()).build ();
         } catch (SQLException | DatabaseConnectionException e) {
-            System.out.println("Error getting jobs: " + e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+            System.out.println ("Error getting jobs: " + e);
+            return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
         }
     }
 
@@ -44,10 +47,10 @@ public class RecruitmentRequests {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBands() {
         try {
-            return Response.ok(jobService.getBands()).build();
+            return Response.ok (jobService.getBands ()).build ();
         } catch (SQLException | DatabaseConnectionException e) {
-            System.out.println("Error getting bands: " + e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+            System.out.println ("Error getting bands: " + e);
+            return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
         }
     }
 
@@ -56,23 +59,59 @@ public class RecruitmentRequests {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCapabilities() {
         try {
-            return Response.ok(jobService.getCapabilities()).build();
+            return Response.ok (jobService.getCapabilities ()).build ();
         } catch (SQLException | DatabaseConnectionException e) {
-            System.out.println("Error getting capabilities: " + e);
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+            System.out.println ("Error getting capabilities: " + e);
+            return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
         }
     }
+
 
     @POST
     @Path("/admin/new-role")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public static Response createNewRole(JobRequest role) throws DatabaseConnectionException {
+    public static Response createNewRole(JobRequest role) throws DatabaseConnectionException, NameTooLongException, SpecificationTooLongException, DescriptionTooLongException, ResponsibilitiesTooLongException {
         try {
-            if (jobValidator.isValidRole(role)) {
+            if (jobValidator.isValidRole (role)) {
                 try {
-                    int id = jobService.insertNewRole(role);
-                    return Response.status(HttpStatus.CREATED_201).entity(id).build();
+                    int id = jobService.insertNewRole (role);
+                    return Response.status (HttpStatus.CREATED_201).entity (id).build ();
+                } catch (SQLException | DatabaseConnectionException e) {
+                    System.out.println ("Error getting jobs: " + e);
+                    return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
+                }
+            }
+        } catch (NameTooLongException | DescriptionTooLongException | SpecificationTooLongException |
+                 ResponsibilitiesTooLongException e) {
+            return Response.status (HttpStatus.BAD_REQUEST_400).build ();
+        }
+        return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
+    }
+
+
+
+        @GET
+        @Path("/job-roles/{id}")
+        @Produces(MediaType.APPLICATION_JSON)
+        public Response getJobRoleById ( @PathParam("id") int id) {
+            try {
+                return Response.ok (jobService.getJobById (id)).build ();
+            } catch (SQLException | DatabaseConnectionException e) {
+                System.out.println ("Error getting jobs: " + e);
+                return Response.status (HttpStatus.INTERNAL_SERVER_ERROR_500).build ();
+            }
+        }
+
+
+        @PUT
+    @Path("/admin/edit-role")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public static Response editRole(JobEditRequest request) throws DatabaseConnectionException {
+        try {
+            if (jobValidator.isValidRole(request)) {
+                try {
+                    return Response.ok(jobService.editJobRole (request)).build();
                 } catch (Exception e) {
                     System.out.println(e);
                     return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
@@ -84,4 +123,6 @@ public class RecruitmentRequests {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
+
+
 }

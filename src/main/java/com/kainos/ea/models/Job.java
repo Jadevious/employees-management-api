@@ -41,6 +41,8 @@ public class Job {
         this.capability = capability;
     }
 
+
+
     public int getId() {
         return id;
     }

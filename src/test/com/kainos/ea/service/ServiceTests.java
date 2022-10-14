@@ -5,7 +5,11 @@ import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.models.Band;
 import com.kainos.ea.models.Capability;
 import com.kainos.ea.models.Job;
+<<<<<<< HEAD
 import com.kainos.ea.models.JobRequest;
+=======
+import com.kainos.ea.models.JobEditRequest;
+>>>>>>> origin/main
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -67,7 +71,10 @@ class ServiceTests {
         assertThrows(SQLException.class,
                 () -> jobsRequestService.getJobs());
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
     @Test
     void getBands_shouldReturnListOfBands_whenDaoReturnsListOfBands() throws DatabaseConnectionException, SQLException {
         List<Band> expected = new ArrayList<Band>();
@@ -101,6 +108,7 @@ class ServiceTests {
     }
 
     @Test
+<<<<<<< HEAD
     void insertNewRole_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
@@ -118,5 +126,70 @@ class ServiceTests {
 
         assertThrows(SQLException.class,
                 () -> jobsRequestService.insertNewRole(jobRequest));
+=======
+    void getJobById_shouldReturnJob_whenDaoReturnsJob() throws DatabaseConnectionException, SQLException {
+        Job expected = (new Job(
+                1,
+                "Software Engineer",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                "Apprentice",
+                "Engineering"));
+
+        int id = 1;
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getJob(id, conn)).thenReturn(expected);
+
+        Job actual = jobsRequestService.getJobById (id);
+
+        assertEquals(actual, expected);
+    }
+    @Test
+    void getJobsById_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        int id = 1;
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.getJob(id, conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobsRequestService.getJobById (id));
+    }
+
+    @Test
+    void editJob_shouldReturnSuccessfullyUpdatedMessage_whenDaoReturnsJob() throws DatabaseConnectionException, SQLException {
+        JobEditRequest expected = (new JobEditRequest (
+                1,
+                "Software Developer",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                1));
+
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.editJobRole (expected, conn)).thenReturn("Role successfully updated");
+
+        String actual = jobsRequestService.editJobRole (expected);
+
+        assertEquals(actual, "Role successfully updated" );
+    }
+
+    @Test
+    void editJob_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        JobEditRequest expected = (new JobEditRequest (
+                1,
+                "Software Developer",
+                "Develops Software for Kainos",
+                "https://example.org",
+                "Experience of building and testing modern software applications",
+                1,
+                1));
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobsDao.editJobRole (expected, conn)).thenThrow(SQLException.class);
+
+        assertThrows(SQLException.class,
+                () -> jobsRequestService.editJobRole (expected));
+>>>>>>> origin/main
     }
 }
