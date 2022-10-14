@@ -36,3 +36,4 @@ public class Capability {
         this.name = name;
     }
 }
+
