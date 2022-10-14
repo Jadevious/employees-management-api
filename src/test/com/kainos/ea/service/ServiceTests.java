@@ -5,11 +5,8 @@ import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.models.Band;
 import com.kainos.ea.models.Capability;
 import com.kainos.ea.models.Job;
-<<<<<<< HEAD
 import com.kainos.ea.models.JobRequest;
-=======
 import com.kainos.ea.models.JobEditRequest;
->>>>>>> origin/main
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -71,10 +68,7 @@ class ServiceTests {
         assertThrows(SQLException.class,
                 () -> jobsRequestService.getJobs());
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
     @Test
     void getBands_shouldReturnListOfBands_whenDaoReturnsListOfBands() throws DatabaseConnectionException, SQLException {
         List<Band> expected = new ArrayList<Band>();
@@ -108,7 +102,6 @@ class ServiceTests {
     }
 
     @Test
-<<<<<<< HEAD
     void insertNewRole_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
@@ -126,7 +119,9 @@ class ServiceTests {
 
         assertThrows(SQLException.class,
                 () -> jobsRequestService.insertNewRole(jobRequest));
-=======
+    }
+
+    @Test
     void getJobById_shouldReturnJob_whenDaoReturnsJob() throws DatabaseConnectionException, SQLException {
         Job expected = (new Job(
                 1,
@@ -146,6 +141,7 @@ class ServiceTests {
 
         assertEquals(actual, expected);
     }
+
     @Test
     void getJobsById_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
         int id = 1;
@@ -190,6 +186,5 @@ class ServiceTests {
 
         assertThrows(SQLException.class,
                 () -> jobsRequestService.editJobRole (expected));
->>>>>>> origin/main
     }
 }
